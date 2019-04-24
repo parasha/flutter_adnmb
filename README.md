@@ -2,6 +2,17 @@
 
 A new Flutter project.
 
+Flutter 学习项目。
+
+目前基本完成了看串的功能（反正是能用，好不好用不重要）
+
+计划添加：
+- html 格式处理
+- 扫码存饼干
+- 回复
+
+封闭开发 time，不定期更新
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
