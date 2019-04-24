@@ -1,7 +1,5 @@
 # adnmb
 
-A new Flutter project.
-
 Flutter 学习项目。
 
 目前基本完成了看串的功能（反正是能用，好不好用不重要）
