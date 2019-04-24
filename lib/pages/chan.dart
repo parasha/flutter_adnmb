@@ -83,62 +83,65 @@ class ChanPageState extends State {
 
   // 串内回复列表
   Widget postListInit(Map item) {
-    // List<Widget> r = [mainChanInit(chanDetail)];
-    // for (var item in replyList) {
     Widget tile = new Container(
-        margin: EdgeInsets.only(bottom: 15),
-        padding: EdgeInsets.only(bottom: 15),
-        decoration: new BoxDecoration(
-            border: new Border(top: BorderSide(color: Colors.blueAccent))),
-        child: new ListTile(
-          title: new Row(
-            children: <Widget>[
-              new Text(
-                item['userid'],
-                style: new TextStyle(fontWeight: FontWeight.bold),
-              ),
-              new Container(
-                padding: EdgeInsets.only(left: 20),
-                child: new Text(item['now']),
-              )
-            ],
-          ),
-          subtitle: item['img'] == ''
-              ? new Text(item['content'])
-              : new Row(
-                  children: <Widget>[
-                    new FlatButton(
-                      onPressed: () => openImgPreview(
-                          context,
-                          'https://nmbimg.fastmirror.org/image/' +
-                              item['img'] +
-                              item['ext']),
-                      child: Image.network(
+      margin: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.only(bottom: 15),
+      decoration: new BoxDecoration(
+          border: new Border(top: BorderSide(color: Colors.blueAccent))),
+      child: new ListTile(
+        title: new Row(
+          children: <Widget>[
+            new Text(
+              item['userid'],
+              style: new TextStyle(fontWeight: FontWeight.bold),
+            ),
+            new Container(
+              padding: EdgeInsets.only(left: 20),
+              child: new Text(item['now']),
+            )
+          ],
+        ),
+        subtitle: item['img'] == ''
+            ? new Text(item['content'])
+            : new Row(
+                children: <Widget>[
+                  new FlatButton(
+                    onPressed: () => openImgPreview(
+                        context,
                         'https://nmbimg.fastmirror.org/image/' +
                             item['img'] +
-                            item['ext'],
-                        width: 100.0,
-                        height: 100.0,
-                      ),
+                            item['ext']),
+                    child: Image.network(
+                      'https://nmbimg.fastmirror.org/image/' +
+                          item['img'] +
+                          item['ext'],
+                      width: 100.0,
+                      height: 100.0,
                     ),
-                    new Expanded(
-                      flex: 1,
-                      child: new Text(
-                        item['content'],
-                        overflow: TextOverflow.clip,
-                      ),
-                    )
-                  ],
-                ),
-        ));
-    // r.add(tile);
-    // }
+                  ),
+                  new Expanded(
+                    flex: 1,
+                    child: new Text(
+                      item['content'],
+                      overflow: TextOverflow.clip,
+                    ),
+                  )
+                ],
+              ),
+      ),
+    );
     return tile;
   }
 
   void getPostList(String chanId, String page) async {
     Map<String, String> data = {'id': chanId, 'page': page};
     var pl = await http.get('nmb.fastmirror.org/Api/thread', data: data);
+    if (pl['replys'].length < 20) {
+      getBottom = true;
+    }
+    if (pl['replys'].length == 1 && pl['replys'][0]['title'] == '广告') {
+      return;
+    }
     setState(() {
       try {
         replyList == null
@@ -149,10 +152,6 @@ class ChanPageState extends State {
         }
         print(pl['replys'].length);
         print(pl['replys'][0]['title']);
-
-        if (pl['replys'].length == 1 && pl['replys'][0]['title'] == '广告') {
-          getBottom = true;
-        }
       } catch (e) {
         print(e);
         replyList = null;
@@ -170,32 +169,25 @@ class ChanPageState extends State {
           ? new Center(child: new Text('Loading...少女祈祷中'))
           : new Scrollbar(
               child: new NotificationListener(
-                  onNotification: (ScrollNotification sn) {
-                    if (sn.metrics.extentAfter < 200) {
-                      loadNextPage();
+                onNotification: (ScrollNotification sn) {
+                  if (sn.metrics.extentAfter < 200) {
+                    loadNextPage();
+                  }
+                },
+                child: ListView.builder(
+                  itemCount: replyList == null ? 1 : replyList.length + 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    print(replyList.length);
+                    if (index == 0) {
+                      return mainChanInit(chanDetail);
+                    } else {
+                      var item = replyList[index - 1];
+                      return postListInit(item);
                     }
                   },
-                  child: ListView.builder(
-                    itemCount: replyList == null ? 1 : replyList.length + 1,
-                    itemBuilder: (BuildContext context, int index) {
-                      print(replyList.length);
-                      if (index == 0) {
-                        return mainChanInit(chanDetail);
-                      } else {
-                        var item = replyList[index - 1];
-                        return postListInit(item);
-                      }
-                    },
-                  )
-                  // new ListView(children: postListInit(replyList)),
-                  ),
+                ),
+              ),
             ),
-      // floatingActionButton: new FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.pushNamed(context, 'file');
-      //   },
-      //   child: new Icon(Icons.photo),
-      // ),
     );
   }
 }
