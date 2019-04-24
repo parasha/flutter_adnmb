@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:adnmb/utils/http.dart';
 import 'package:adnmb/pages/imgPreview.dart';
 
+import 'package:adnmb/utils/htmlEscape.dart';
+
 class ChanPage extends StatefulWidget {
   String chanId;
   ChanPage(this.chanId) : super();
@@ -33,25 +35,28 @@ class ChanPageState extends State {
     }
   }
 
-  // 主标题
+  // po
   Widget mainChanInit(Map chanDetail) {
     return new Container(
       margin: EdgeInsets.only(bottom: 20),
       child: new ListTile(
-        title: new Row(
-          children: <Widget>[
-            new Text(
-              chanDetail['userid'],
-              style: new TextStyle(fontWeight: FontWeight.bold),
-            ),
-            new Container(
-              padding: EdgeInsets.only(left: 20),
-              child: new Text(chanDetail['now']),
-            )
-          ],
+        title: new Container(
+          margin: EdgeInsets.only(bottom:10),
+          child: new Row(
+            children: <Widget>[
+              new Text(
+                chanDetail['userid'],
+                style: new TextStyle(fontWeight: FontWeight.bold),
+              ),
+              new Container(
+                padding: EdgeInsets.only(left: 20),
+                child: new Text(chanDetail['now']),
+              )
+            ],
+          ),
         ),
         subtitle: chanDetail['img'] == ''
-            ? new Text(chanDetail['content'])
+            ? new Text(htmlEscape(chanDetail['content']))
             : new Row(
                 children: <Widget>[
                   new FlatButton(
@@ -71,7 +76,7 @@ class ChanPageState extends State {
                   new Expanded(
                     flex: 1,
                     child: new Text(
-                      chanDetail['content'],
+                      htmlEscape(chanDetail['content']),
                       overflow: TextOverflow.clip,
                     ),
                   )
@@ -89,20 +94,25 @@ class ChanPageState extends State {
       decoration: new BoxDecoration(
           border: new Border(top: BorderSide(color: Colors.blueAccent))),
       child: new ListTile(
-        title: new Row(
-          children: <Widget>[
-            new Text(
-              item['userid'],
-              style: new TextStyle(fontWeight: FontWeight.bold),
-            ),
-            new Container(
-              padding: EdgeInsets.only(left: 20),
-              child: new Text(item['now']),
-            )
-          ],
+        title: new Container(
+          margin: EdgeInsets.only(bottom: 10),
+          child: new Row(
+            children: <Widget>[
+              new Text(
+                item['userid'],
+                style: item['userid'] == chanDetail['userid']
+                    ? new TextStyle(fontWeight: FontWeight.bold)
+                    : null,
+              ),
+              new Container(
+                padding: EdgeInsets.only(left: 20),
+                child: new Text(item['now']),
+              )
+            ],
+          ),
         ),
         subtitle: item['img'] == ''
-            ? new Text(item['content'])
+            ? new Text(htmlEscape(item['content']))
             : new Row(
                 children: <Widget>[
                   new FlatButton(
@@ -122,7 +132,7 @@ class ChanPageState extends State {
                   new Expanded(
                     flex: 1,
                     child: new Text(
-                      item['content'],
+                      htmlEscape(item['content']),
                       overflow: TextOverflow.clip,
                     ),
                   )

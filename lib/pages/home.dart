@@ -4,6 +4,8 @@ import 'package:adnmb/utils/http.dart';
 import 'package:adnmb/pages/chan.dart';
 import 'package:adnmb/pages/imgPreview.dart';
 
+import 'package:adnmb/utils/htmlEscape.dart';
+
 class Home extends StatefulWidget {
   HomeState createState() => new HomeState();
 }
@@ -12,7 +14,7 @@ class HomeState extends State {
   List forumList;
   List postList;
 
-  String forumindex = '20';
+  String forumindex = '4';
   String pageIndex = '1';
 
   String pageTitle = '综合版';
@@ -120,35 +122,36 @@ class HomeState extends State {
   }
 
   Widget postListInit(Map item) {
-        Widget tile = new Container(
-            margin: EdgeInsets.only(bottom: 15),
-            padding: EdgeInsets.only(bottom: 15),
-            decoration: new BoxDecoration(
-                border:
-                    new Border(bottom: BorderSide(color: Colors.blueAccent))),
-            child: listTileInit(item));
-      return tile;
+    Widget tile = new Container(
+        margin: EdgeInsets.only(bottom: 15),
+        padding: EdgeInsets.only(bottom: 15),
+        decoration: new BoxDecoration(
+            border: new Border(bottom: BorderSide(color: Colors.blueAccent))),
+        child: listTileInit(item));
+    return tile;
   }
 
   Widget listTileInit(Map item) {
     return new ListTile(
       onTap: () => jumpChanPage(item['id']),
-      title: new Row(
-        children: <Widget>[
-          new Text(
-            item['userid'],
-            style: new TextStyle(fontWeight: FontWeight.bold),
-          ),
-          new Container(
-            padding: EdgeInsets.only(left: 20),
-            child: new Text(item['now']),
-          )
-        ],
+      title: new Container(
+        child: new Row(
+          children: <Widget>[
+            new Text(
+              item['userid'],
+              style: new TextStyle(fontWeight: FontWeight.bold),
+            ),
+            new Container(
+              padding: EdgeInsets.only(left: 20),
+              child: new Text(item['now']),
+            )
+          ],
+        ),
       ),
       subtitle: new Container(
         margin: EdgeInsets.only(top: 10),
         child: item['img'] == ''
-            ? new Text(item['content'])
+            ? new Text(htmlEscape(item['content']))
             : new Row(
                 children: <Widget>[
                   new FlatButton(
@@ -170,7 +173,7 @@ class HomeState extends State {
                   new Expanded(
                     flex: 1,
                     child: new Text(
-                      item['content'],
+                      htmlEscape(item['content']),
                       overflow: TextOverflow.clip,
                     ),
                   )
@@ -186,21 +189,23 @@ class HomeState extends State {
       appBar: new AppBar(
         title: new Text(pageTitle),
       ),
-      body: new Scrollbar(
+      body:
+      postList == null ?
+      new Center(child: new Text('Loading...少女祈祷中')) :
+      new Scrollbar(
         child: new NotificationListener(
-          onNotification: (ScrollNotification sn) {
-            if (sn.metrics.extentAfter < 200) {
-              loadNextPage();
-            }
-          },
-          child: ListView.builder(
-            itemCount: postList ==null ? 0 : postList.length,
-            itemBuilder: (BuildContext context,int index){
-              var item = postList[index];
-                return postListInit(item);
+            onNotification: (ScrollNotification sn) {
+              if (sn.metrics.extentAfter < 200) {
+                loadNextPage();
+              }
             },
-          )
-        ),
+            child: ListView.builder(
+              itemCount: postList == null ? 0 : postList.length,
+              itemBuilder: (BuildContext context, int index) {
+                var item = postList[index];
+                return postListInit(item);
+              },
+            )),
       ),
       floatingActionButton: new FloatingActionButton(
           onPressed: refreshData, child: new Icon(Icons.refresh)),
