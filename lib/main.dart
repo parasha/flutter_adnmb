@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:adnmb/pages/home.dart';
-// import 'package:adnmb/pages/file.dart';
+
 
 class App extends StatelessWidget {
   @override
