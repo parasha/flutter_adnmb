@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:adnmb/pages/home.dart';
+import 'package:adnmb/pages/setting.dart';
 
 
 class App extends StatelessWidget {
@@ -9,7 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       home: Home(),
       routes: {
-        // 'file': (context)=> FileOperationRoute()
+        'SETTING': (context)=> SettingPage()
       },
     );
   }

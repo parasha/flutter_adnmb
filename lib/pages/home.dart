@@ -93,7 +93,27 @@ class HomeState extends State {
 
   // 数据渲染
   List forumInit(List forumList) {
-    List<Widget> r = [];
+    List<Widget> r = [
+      Container(
+        decoration: new BoxDecoration(
+            border: new Border(bottom: BorderSide(color: Colors.blueGrey))),
+        child: ListTile(
+          title: Row(
+            children: <Widget>[
+              Icon(Icons.settings),
+              Container(
+                child: Text('设置'),
+                margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+              )
+            ],
+          ),
+          // contentPadding: EdgeInsets.fromLTRB(40, 0, 0, 0),
+          onTap: (){
+            Navigator.pushNamed(context, 'SETTING');
+          },
+        ),
+      ),
+    ];
     if (forumList != null) {
       for (var area in forumList) {
         ListTile tile = new ListTile(
@@ -151,7 +171,9 @@ class HomeState extends State {
       subtitle: new Container(
         margin: EdgeInsets.only(top: 10),
         child: item['img'] == ''
-            ? new Text(htmlEscape(item['content']),)
+            ? new Text(
+                htmlEscape(item['content']),
+              )
             : new Row(
                 children: <Widget>[
                   new FlatButton(
@@ -189,34 +211,33 @@ class HomeState extends State {
       appBar: new AppBar(
         title: new Text(pageTitle),
       ),
-      body:
-      postList == null ?
-      new Center(child: new Text('Loading...少女祈祷中')) :
-      new Scrollbar(
-        child: new NotificationListener(
-            onNotification: (ScrollNotification sn) {
-              if (sn.metrics.extentAfter < 200) {
-                loadNextPage();
-              }
-            },
-            child: ListView.builder(
-              itemCount: postList == null ? 0 : postList.length,
-              itemBuilder: (BuildContext context, int index) {
-                var item = postList[index];
-                return postListInit(item);
-              },
-            )),
-      ),
+      body: postList == null
+          ? new Center(child: new Text('Loading...少女祈祷中'))
+          : new Scrollbar(
+              child: new NotificationListener(
+                  onNotification: (ScrollNotification sn) {
+                    if (sn.metrics.extentAfter < 200) {
+                      loadNextPage();
+                    }
+                  },
+                  child: ListView.builder(
+                    itemCount: postList == null ? 0 : postList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var item = postList[index];
+                      return postListInit(item);
+                    },
+                  )),
+            ),
       floatingActionButton: new FloatingActionButton(
           onPressed: refreshData, child: new Icon(Icons.refresh)),
       drawer: new Drawer(
         child: new Scaffold(
           appBar: new AppBar(
-            title: new Text('AppBar'),
+            // title: new Text('板块列表'),
             automaticallyImplyLeading: false,
             centerTitle: false,
           ),
-          body: new ListView(children: forumInit(forumList)),
+          body: ListView(children: forumInit(forumList)),
         ),
       ),
     );
