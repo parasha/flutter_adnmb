@@ -160,10 +160,7 @@ class ChanPageState extends State {
         if (chanDetail == null) {
           chanDetail = pl;
         }
-        print(pl['replys'].length);
-        print(pl['replys'][0]['title']);
       } catch (e) {
-        print(e);
         replyList = null;
         chanDetail = null;
       }
@@ -187,7 +184,6 @@ class ChanPageState extends State {
                 child: ListView.builder(
                   itemCount: replyList == null ? 1 : replyList.length + 1,
                   itemBuilder: (BuildContext context, int index) {
-                    print(replyList.length);
                     if (index == 0) {
                       return mainChanInit(chanDetail);
                     } else {

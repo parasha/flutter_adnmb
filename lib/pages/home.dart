@@ -151,7 +151,7 @@ class HomeState extends State {
       subtitle: new Container(
         margin: EdgeInsets.only(top: 10),
         child: item['img'] == ''
-            ? new Text(htmlEscape(item['content']))
+            ? new Text(htmlEscape(item['content']),)
             : new Row(
                 children: <Widget>[
                   new FlatButton(
