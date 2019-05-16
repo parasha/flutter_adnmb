@@ -95,8 +95,8 @@ class HomeState extends State {
   List forumInit(List forumList) {
     List<Widget> r = [
       Container(
-        decoration: new BoxDecoration(
-            border: new Border(bottom: BorderSide(color: Colors.blueGrey))),
+        decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: Colors.blueGrey))),
         child: ListTile(
           title: Row(
             children: <Widget>[
@@ -108,11 +108,19 @@ class HomeState extends State {
             ],
           ),
           // contentPadding: EdgeInsets.fromLTRB(40, 0, 0, 0),
-          onTap: (){
+          onTap: () {
             Navigator.pushNamed(context, 'SETTING');
           },
         ),
       ),
+      Container(
+        child: Text(
+          '板块列表',
+          style: TextStyle(color: Colors.blueAccent),
+        ),
+        padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
+        decoration: BoxDecoration(color: Color.fromRGBO(180, 180, 180, 0.5)),
+      )
     ];
     if (forumList != null) {
       for (var area in forumList) {
