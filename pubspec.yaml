@@ -22,8 +22,10 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   fluttertoast: ^2.1.1 # toast
-  barcode_scan: ^0.0.4 # qrcode
+  barcode_scan: ^0.0.4 # 二维码
   shared_preferences: ^0.5.0 # 数据存储
+  flutter_redux: ^0.5.3
+  redux: ^3.0.0
 
 dev_dependencies:
   flutter_test:

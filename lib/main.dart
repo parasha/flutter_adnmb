@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:adnmb/pages/home.dart';
 import 'package:adnmb/pages/setting.dart';
@@ -16,6 +17,10 @@ class App extends StatelessWidget {
   }
 }
 
+
 void main(List<String> args) async {
-  runApp(App());
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  String cookie = sharedPreferences.getString('cookie');
+  print(cookie);
+  runApp( App());
 }
