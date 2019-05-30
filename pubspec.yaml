@@ -24,6 +24,7 @@ dependencies:
   fluttertoast: ^2.1.1 # toast
   barcode_scan: ^0.0.4 # 二维码
   shared_preferences: ^0.5.0 # 数据存储
+  dio: ^2.1.0 # http 请求
   flutter_redux: ^0.5.3
   redux: ^3.0.0
 

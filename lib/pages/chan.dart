@@ -145,7 +145,7 @@ class ChanPageState extends State {
 
   void getPostList(String chanId, String page) async {
     Map<String, String> data = {'id': chanId, 'page': page};
-    var pl = await http.get('nmb.fastmirror.org/Api/thread', data: data);
+    var pl = await AppHttp.get('/thread', data: data);
     if (pl['replys'].length < 20) {
       getBottom = true;
     }

@@ -71,7 +71,7 @@ class HomeState extends State {
 
   // 接口请求
   void getForumList() async {
-    var fl = await http.get('nmb.fastmirror.org/Api/getForumList');
+    var fl = await AppHttp.get('/getForumList');
     setState(() {
       forumList = fl;
     });
@@ -79,7 +79,7 @@ class HomeState extends State {
 
   void getPostById(String id, String page) async {
     Map<String, String> data = {'id': id, 'page': page};
-    var pl = await http.get('nmb.fastmirror.org/Api/showf', data: data);
+    var pl = await AppHttp.get('/showf', data: data);
     setState(
       () {
         try {
