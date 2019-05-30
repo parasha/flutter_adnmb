@@ -31,7 +31,7 @@ class SettingPageState extends State {
     setState(() {
       qrcodeInfo = qr['cookie'];
     });
-    sharedPreferences.setString('COOKIE', qr['cookie']);
+    sharedPreferences.setString('cookie', qr['cookie']);
   }
 
   Widget build(BuildContext context) {

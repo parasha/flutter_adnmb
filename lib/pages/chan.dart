@@ -41,7 +41,7 @@ class ChanPageState extends State {
       margin: EdgeInsets.only(bottom: 20),
       child: new ListTile(
         title: new Container(
-          margin: EdgeInsets.only(bottom:10),
+          margin: EdgeInsets.only(bottom: 10),
           child: new Row(
             children: <Widget>[
               new Text(
