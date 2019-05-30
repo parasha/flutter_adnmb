@@ -56,7 +56,7 @@ class AppHttp {
     ),
   );
 
-  static dynamic get(String url, {Map data}) async {
+  static dynamic get(String url, {Map data, Options options}) async {
     /*
     一个 Response 返回对象包含下列内容
     {
@@ -80,11 +80,7 @@ class AppHttp {
     */
 
     Response res;
-    if (data == null) {
-      res = await dio.get(url);
-    } else {
-      res = await dio.get(url, queryParameters: data);
-    }
+    res = await dio.get(url, queryParameters: data, options: options);
     return res.data;
   }
 }
