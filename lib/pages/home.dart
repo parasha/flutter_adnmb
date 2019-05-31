@@ -61,7 +61,7 @@ class HomeState extends State {
     }
     forumindex = id;
     pageIndex = '1';
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
     setState(() {
       postList = null;
       pageTitle = title;
@@ -109,6 +109,7 @@ class HomeState extends State {
           ),
           // contentPadding: EdgeInsets.fromLTRB(40, 0, 0, 0),
           onTap: () {
+            Navigator.pop(context);
             Navigator.pushNamed(context, 'SETTING');
           },
         ),
@@ -183,6 +184,7 @@ class HomeState extends State {
                 htmlEscape(item['content']),
               )
             : new Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new FlatButton(
                     onPressed: () {

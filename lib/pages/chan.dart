@@ -3,6 +3,9 @@ import 'package:adnmb/utils/http.dart';
 import 'package:adnmb/pages/imgPreview.dart';
 
 import 'package:adnmb/utils/htmlEscape.dart';
+import 'package:adnmb/utils/simple_store.dart' show store;
+import 'package:adnmb/utils/appToast.dart';
+
 
 class ChanPage extends StatefulWidget {
   String chanId;
