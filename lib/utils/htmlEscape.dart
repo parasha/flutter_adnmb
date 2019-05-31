@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 String htmlEscape(String text){
   // 去除换行 <br>
   text = text.replaceAll('<br />', '');
+  text = text.replaceAll('<br>', '');
   text = text.replaceAll('&gt;', '>');
   text = text.replaceAll('&lt;', '<');
 
