@@ -1,11 +1,14 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:adnmb/utils/http.dart';
 import 'package:adnmb/pages/imgPreview.dart';
+import 'package:adnmb/pages/repply.dart';
 
 import 'package:adnmb/utils/htmlEscape.dart';
 import 'package:adnmb/utils/simple_store.dart' show store;
 import 'package:adnmb/utils/appToast.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChanPage extends StatefulWidget {
   String chanId;
@@ -16,6 +19,7 @@ class ChanPage extends StatefulWidget {
 class ChanPageState extends State {
   String chanId;
   String pageIndex = '1';
+  String cookie;
   List replyList;
   Map chanDetail;
   bool loadSwitch = false;
@@ -24,7 +28,13 @@ class ChanPageState extends State {
   ChanPageState(this.chanId) : super();
 
   void initState() {
+    loadCookie();
     getPostList(chanId, pageIndex);
+  }
+
+  Future loadCookie() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    cookie = sharedPreferences.getString('cookie');
   }
 
   void loadNextPage() async {
@@ -174,6 +184,18 @@ class ChanPageState extends State {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('No.' + chanId),
+        actions: cookie != null
+            ? <Widget>[
+                IconButton(
+                    icon: Icon(Icons.add_comment),
+                    onPressed: () {
+                      Navigator.push(context,
+                          new MaterialPageRoute(builder: (context) {
+                        return Repply(chanId);
+                      }));
+                    })
+              ]
+            : null,
       ),
       body: chanDetail == null
           ? new Center(child: new Text('Loading...少女祈祷中'))

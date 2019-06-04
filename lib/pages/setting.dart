@@ -14,29 +14,29 @@ class SettingPage extends StatefulWidget {
 class SettingPageState extends State {
   String qrcodeInfo;
 
-  Future readQrcode() async {
-    try {
-      String barcode = await BarcodeScanner.scan();
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      String cookie = json.decode(barcode)['cookie'];
-      sharedPreferences.setString('COOKIE', cookie);
-      store.saveCookie(cookie);
-      showAppToast('保存饼干');
-    }catch(e){
-      showAppToast('扫码失败');
-    }
-  }
-
-  // void readQrcode() async {
-  //   Map qr = json.decode(
-  //       '{"cookie":"Wh%D5%CA%B2GT%CC%92%98%0B%F3%E1%E2%93%C4%8D%13%FB%FD%AA%A7%C2%2A"}');
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     qrcodeInfo = qr['cookie'];
-  //   });
-  //   store.saveCookie(qr['cookie']);
-  //   sharedPreferences.setString('cookie', qr['cookie']);
+  // Future readQrcode() async {
+  //   try {
+  //     String barcode = await BarcodeScanner.scan();
+  //     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //     String cookie = json.decode(barcode)['cookie'];
+  //     sharedPreferences.setString('COOKIE', cookie);
+  //     store.saveCookie(cookie);
+  //     showAppToast('保存饼干');
+  //   }catch(e){
+  //     showAppToast('扫码失败');
+  //   }
   // }
+
+  void readQrcode() async {
+    Map qr = json.decode(
+        '{"cookie":"Wh%D5%CA%B2GT%CC%92%98%0B%F3%E1%E2%93%C4%8D%13%FB%FD%AA%A7%C2%2A"}');
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      qrcodeInfo = qr['cookie'];
+    });
+    store.saveCookie(qr['cookie']);
+    sharedPreferences.setString('cookie', qr['cookie']);
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
