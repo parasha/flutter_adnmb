@@ -2,6 +2,7 @@
 
 Flutter 学习项目。
 
+
 目前基本完成了看串的功能（反正是能用，好不好用不重要）
 
 计划添加：
@@ -9,17 +10,9 @@ Flutter 学习项目。
 - 扫码存饼干
 - 回复
 
-封闭开发 time，不定期更新
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+git clone git@github.com:parasha/flutter_adnmb.git
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+flutter create <项目名>
