@@ -14,7 +14,7 @@ packages:
       name: barcode_scan
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.8"
+    version: "3.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -50,13 +50,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.14.13"
-  cookie_jar:
-    dependency: transitive
-    description:
-      name: cookie_jar
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -70,7 +63,7 @@ packages:
       name: dio
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.2"
+    version: "3.0.10"
   fake_async:
     dependency: transitive
     description:
@@ -85,18 +78,18 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.2.1"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.10.11"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_redux:
-    dependency: "direct main"
-    description:
-      name: flutter_redux
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.5.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -113,7 +106,14 @@ packages:
       name: fluttertoast
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.2.11"
+    version: "7.0.2"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.4"
   intl:
     dependency: transitive
     description:
@@ -177,13 +177,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.13"
-  redux:
-    dependency: "direct main"
+  protobuf:
+    dependency: transitive
     description:
-      name: redux
+      name: protobuf
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.0"
+    version: "1.0.1"
   shared_preferences:
     dependency: "direct main"
     description:

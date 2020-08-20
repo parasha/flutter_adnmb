@@ -21,10 +21,10 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
-  fluttertoast: ^7.0.0' # toast
+  fluttertoast: ^7.0.2 # toast
   barcode_scan: ^3.0.0 # 二维码
   shared_preferences: ^0.5.8 # 数据存储
-  dio: ^3.0.0' # http 请求
+  dio: ^3.0.0 # http 请求
 
 dev_dependencies:
   flutter_test:
