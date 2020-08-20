@@ -6,7 +6,7 @@ void showAppToast(String msg) {
     msg: msg,
     toastLength: Toast.LENGTH_LONG,
     gravity: ToastGravity.BOTTOM,
-    timeInSecForIos: 1,
+    timeInSecForIosWeb: 1,
     backgroundColor: Color.fromRGBO(0, 0, 0, 0.6),
     textColor: Color.fromRGBO(255, 255, 255, 1),
   );

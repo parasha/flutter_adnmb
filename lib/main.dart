@@ -17,6 +17,7 @@ class App extends StatelessWidget {
 }
 
 void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   String cookie = sharedPreferences.getString('cookie');
   store.saveCookie(cookie);
